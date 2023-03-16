@@ -86,6 +86,8 @@ class SqliteDB
         print_r($res);
     }
 
+// in 中数据量不能过多（实际测试990多）会报下面的Fatal error  
+// too many SQL variables  
     public function queryIn()
     {
         $key = '020601';
@@ -106,25 +108,18 @@ class SqliteDB
 
     }
 
-/*
-Array
-(
-    [npid] => 148
-    [trans] => operationType只能为0或者1, 0-新增，1-修改
-    [value] =>
-)
- */
+
     public function selectField()
     {
         $key = '020601';
         $language = 'CN';
-        $res = $this->con->select('npid,trans,value')
+        $res = $this->con->select('projectid,trans,value')
             ->from($this->table)
-            ->where('npid = ?')
+            ->where('projectid = ?')
             ->andWhere('key = ?')
             ->andWhere('language = ?')
             ->setParameters([
-                0 => $this->npid,
+                0 => $this->projectid,
                 1 => $key,
                 2 => $language,
             ])
