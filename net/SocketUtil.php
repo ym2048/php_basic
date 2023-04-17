@@ -41,7 +41,7 @@ function firstConnected($nodes)
 {
     $nodesArr = explode(',', $nodes);
     foreach ($nodesArr as $node) {
-        if (isNodeConnected($node)) {
+        if (isConnected($node)) {
             return $node;
         }
     }
